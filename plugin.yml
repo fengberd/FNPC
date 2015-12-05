@@ -1,0 +1,21 @@
+name: FNPC
+main: FNPC\Main
+version: 1.1.4
+api: [1.0.0]
+load: POSTWORLD
+author: "FENGberd"
+commands:
+ fnpc:
+  permission: FNPC.command.fnpc
+  description: "NPC系统指令"
+  usage: "使用 /fnpc help 查看帮助"
+permissions:
+ FNPC.*:
+  description: "根权限"
+  default: op
+ FNPC.command.*:
+  description: "使用命令权限"
+  default: op
+ FNPC.command.fnpc:
+  description: "NPC命令使用权限"
+  default: op
