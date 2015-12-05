@@ -1,6 +1,6 @@
 #FNPC
 心血之作<br />
-付费版:http://pl.zxda.net/plugin/11.html<br />
+付费版:http://pl.zxda.net/plugins/11.html<br />
 功能和此版本无任何区别,是的本新人就是在砸饭碗<br />
 <br />
 真是成功把本新人逼到不想活了呵呵<br />
