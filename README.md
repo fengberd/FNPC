@@ -1,33 +1,23 @@
 #FNPC
-心血之作<br />
-付费版:http://pl.zxda.net/plugins/11.html<br />
-功能和此版本无任何区别,是的本新人就是在砸饭碗<br />
+一款优秀的NPC插件,适合大部分服务器使用<br />
+This is a great NPC plugin.<br />
 <br />
-真是成功把本新人逼到不想活了呵呵<br />
-搞不好哪天被逼到跳楼了就先发一下吧呵呵至少能缓解下压力<br />
+使用方法请输入/fnpc help查看<br />
+Type /fnpc help to display help message.<br />
 <br />
-MC界要完,PM圈已经废了<br />
+捐赠链接:http://pl.zxda.net/plugins/11.html<br />
+Donate link:http://pl.zxda.net/plugins/11.html<br />
 <br />
-估计我在这bb太多也没人看<br />
-所以就不说什么了<br />
+注意,捐赠版和此版本无任何区别<br />
+Donate version is same to this version.<br />
+<br />
+开源版本遵循GPL License(捐赠版不在此范围内)<br />
+This version follow GPL License(Donate version NOT follow it).<br />
 
 #联系方式
 QQ:765569811,1943601164<br />
-E-Mail:admin@fengberd.net<br />
-诅咒和喷词请砸到百度FENGberd吧<br />
-烧纸烧给风鸟就行了<br />
+E-Mail:FENGberd@gmail.com<br />
 
-#对国内小学生
-在这说什么不准倒卖绝对是没有任何用我很清楚<br />
-什么仅供学习交流全tm扯蛋<br />
-<br />
-欢迎倒卖<br />
-欢迎发布所谓破解版<br />
-欢迎流星智障收录<br />
-欢迎面板商拿来打广告<br />
-<br />
-就这么多我不想说别的<br />
-
-#感谢阅读
-没钱吃饭了求施舍,支付宝fengberd@qq.com
+#其他
+如果你有兴趣请看提交记录ad3fbc9b09的README.md文件
 
