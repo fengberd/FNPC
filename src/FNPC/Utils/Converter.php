@@ -1,6 +1,12 @@
 <?php
 namespace FNPC\Utils;
 
+/*
+Copyright FENGberd © 2015
+Coding Project:
+http://coding.net/u/FENGberd/p/FNPC
+*/
+
 use FNPC\SystemProvider;
 
 class Converter

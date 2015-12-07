@@ -1,6 +1,12 @@
 <?php
 namespace FNPC\protocol;
 
+/*
+Copyright FENGberd © 2015
+Coding Project:
+http://coding.net/u/FENGberd/p/FNPC
+*/
+
 class StrangePacket extends \pocketmine\network\protocol\DataPacket
 {
 	const NETWORK_ID=0x1b;

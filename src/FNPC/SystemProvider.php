@@ -1,6 +1,12 @@
 <?php
 namespace FNPC;
 
+/*
+Copyright FENGberd © 2015
+Coding Project:
+http://coding.net/u/FENGberd/p/FNPC
+*/
+
 class SystemProvider
 {
 	public static $plugin=null;

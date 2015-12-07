@@ -1,6 +1,12 @@
 <?php
 namespace FNPC\Tasks;
 
+/*
+Copyright FENGberd © 2015
+Coding Project:
+http://coding.net/u/FENGberd/p/FNPC
+*/
+
 class QuickSystemTask extends \pocketmine\scheduler\PluginTask
 {
 	private $plugin;

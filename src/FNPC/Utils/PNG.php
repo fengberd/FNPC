@@ -1,6 +1,15 @@
 <?php
 namespace FNPC\Utils;
 
+/*
+Copyright FENGberd © 2015
+Coding Project:
+http://coding.net/u/FENGberd/p/FNPC
+
+This file using:
+http://blog.csdn.net/uuq/article/details/6833753
+*/
+
 use ArrayObject;
 
 class PNG

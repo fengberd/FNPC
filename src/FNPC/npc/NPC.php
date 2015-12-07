@@ -1,6 +1,12 @@
 <?php
 namespace FNPC\npc;
 
+/*
+Copyright FENGberd © 2015
+Coding Project:
+http://coding.net/u/FENGberd/p/FNPC
+*/
+
 use pocketmine\Player;
 use pocketmine\Server;
 
