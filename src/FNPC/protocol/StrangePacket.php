@@ -2,7 +2,7 @@
 namespace FNPC\protocol;
 
 /*
-Copyright FENGberd © 2015
+Copyright FENGberd © 2015 All right reserved.
 Coding Project:
 http://coding.net/u/FENGberd/p/FNPC
 */
