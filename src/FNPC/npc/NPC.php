@@ -15,8 +15,6 @@ use pocketmine\utils\TextFormat;
 
 use pocketmine\math\Vector3;
 
-use pocketmine\network\Network;
-
 use FNPC\SystemProvider;
 use FNPC\Utils\Converter;
 
@@ -35,6 +33,7 @@ class NPC extends \pocketmine\level\Location
 			{
 				$npc=new $class($key);
 				$npc->reload();
+				$npc->save();
 				unset(NPC::$unknownTypeData[$key]);
 			}
 			unset($key,$val,$npc,$class);
@@ -55,6 +54,7 @@ class NPC extends \pocketmine\level\Location
 			{
 				$npc=new $class($key);
 				$npc->reload();
+				$npc->save();
 			}
 			else
 			{
@@ -128,7 +128,7 @@ class NPC extends \pocketmine\level\Location
 	public $handItem;
 	public $skinpath='';
 	public $skin='';
-	public $isSlim=false;
+	public $skinName='';
 	protected $nid='';
 	public $level='';
 	public $uuid='';
@@ -209,7 +209,8 @@ class NPC extends \pocketmine\level\Location
 			$this->pitch=$this->get($cfg,'pitch');
 			$this->clientID=$this->get($cfg,'clientID');
 			$this->nametag=$this->get($cfg,'nametag');
-			$this->isSlim=$this->get($cfg,'isSlim');
+			$this->skinName=$this->get($cfg,'skinName');
+			$this->skinName=$this->skinName==''?'Standard_Custom':$this->skinName;
 			$this->pay=$this->get($cfg,'pay');
 			$this->extra=$this->get($cfg,'extra');
 			SystemProvider::debug('NPC:'.$this->nid.',reload_item');
@@ -397,7 +398,7 @@ class NPC extends \pocketmine\level\Location
 			'skin'=>$this->skinpath,
 			'nametag'=>$this->nametag,
 			'clientID'=>$this->clientID,
-			'isSlim'=>$this->isSlim,
+			'skinName'=>$this->skinName,
 			'pay'=>$this->pay,
 			'extra'=>$this->extra,
 			'handItem'=>array(
@@ -429,7 +430,7 @@ class NPC extends \pocketmine\level\Location
 		$pk=new \pocketmine\network\protocol\RemovePlayerPacket();
 		$pk->eid=$this->getEID();
 		$pk->clientId=$this->uuid;
-		$player->dataPacket($pk->setChannel(Network::CHANNEL_ENTITY_SPAWNING));
+		$player->dataPacket($pk);
 		Server::getInstance()->removePlayerListData($this->uuid,array($player));
 		unset($player,$pk);
 	}
@@ -463,7 +464,6 @@ class NPC extends \pocketmine\level\Location
 			$this->despawnFrom($player);
 			return false;
 		}
-		Server::getInstance()->updatePlayerListData($this->uuid,$this->getEID(),$this->nametag,$this->isSlim,$this->skin,array($player));
 		$pk=new \pocketmine\network\protocol\AddPlayerPacket();
 		$pk->clientID=$this->clientID;
 		$pk->username=$this->nametag;
@@ -485,7 +485,8 @@ class NPC extends \pocketmine\level\Location
 			3=>[0,1],
 			4=>[0,0],
 			15=>[0,0]);
-		$player->dataPacket($pk->setChannel(Network::CHANNEL_ENTITY_SPAWNING));
+		$player->dataPacket($pk);
+		Server::getInstance()->updatePlayerListData($this->uuid,$this->getEID(),$this->nametag,$this->skinName,$this->skin,array($player));
 		unset($player,$pk,$level);
 		return true;
 	}

@@ -4,12 +4,13 @@
 
 name: FNPC
 main: FNPC\Main
-version: 1.1.4
+version: 1.1.5
 api: [1.0.0]
 load: POSTWORLD
 author: "FENGberd"
 commands:
  fnpc:
+  aliases: ["npc"]
   permission: FNPC.command.fnpc
   description: "NPC系统指令"
   usage: "使用 /fnpc help 查看帮助"
