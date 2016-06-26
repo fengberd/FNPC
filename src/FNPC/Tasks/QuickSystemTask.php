@@ -2,9 +2,9 @@
 namespace FNPC\Tasks;
 
 /*
-Copyright FENGberd © 2015 All right reserved.
-Coding Project:
-http://coding.net/u/FENGberd/p/FNPC
+Copyright 2016 © FENGberd All right reserved.
+GitHub Project:
+https://github.com/fengberd/FNPC
 */
 
 class QuickSystemTask extends \pocketmine\scheduler\PluginTask
