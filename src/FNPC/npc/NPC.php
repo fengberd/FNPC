@@ -2,13 +2,15 @@
 namespace FNPC\npc;
 
 /*
-Copyright FENGberd © 2015 All right reserved.
+Copyright 2016 © FENGberd.All right reserved.
 Coding Project:
 http://coding.net/u/FENGberd/p/FNPC
 */
 
 use pocketmine\Player;
 use pocketmine\Server;
+
+use pocketmine\entity\Entity;
 
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
@@ -149,7 +151,7 @@ class NPC extends \pocketmine\level\Location
 			$clientID=mt_rand(1000000,9999999);
 		}
 		$this->clientID=$clientID;
-		$this->eid=\pocketmine\entity\Entity::$entityCount++;
+		$this->eid=Entity::$entityCount++;
 		if($handItem===false)
 		{
 			$handItem=\pocketmine\item\Item::get(0);
@@ -479,12 +481,19 @@ class NPC extends \pocketmine\level\Location
 		$pk->pitch=$this->pitch;
 		$pk->item=$this->handItem;
 		$pk->metadata=array(
-			0=>[0,0],
-			1=>[1,300],
-			2=>[4,$this->nametag],
-			3=>[0,1],
-			4=>[0,0],
-			15=>[0,0]);
+			Entity::DATA_FLAGS=>[Entity::DATA_TYPE_BYTE,0],
+			Entity::DATA_AIR=>[Entity::DATA_TYPE_SHORT,300],
+			Entity::DATA_NAMETAG=>[Entity::DATA_TYPE_STRING,$this->nametag],
+			Entity::DATA_SHOW_NAMETAG=>[Entity::DATA_TYPE_BYTE,1],
+			Entity::DATA_SILENT=>[Entity::DATA_TYPE_BYTE,0],
+			Entity::DATA_NO_AI=>[Entity::DATA_TYPE_BYTE,1],
+			Entity::DATA_LEAD_HOLDER=>[Entity::DATA_TYPE_LONG,-1],
+			Entity::DATA_LEAD=>[Entity::DATA_TYPE_BYTE,0]);
+		$player->dataPacket($pk);
+		$pk=new \pocketmine\network\protocol\SetEntityLinkPacket();
+		$pk->from=$this->getId();
+		$pk->to=0;
+		$pk->type=3;
 		$player->dataPacket($pk);
 		Server::getInstance()->updatePlayerListData($this->uuid,$this->getEID(),$this->nametag,$this->skinName,$this->skin,array($player));
 		unset($player,$pk,$level);

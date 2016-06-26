@@ -2,7 +2,7 @@
 namespace FNPC\npc;
 
 /*
-Copyright FENGberd © 2015 All right reserved.
+Copyright 2016 © FENGberd.All right reserved.
 Coding Project:
 http://coding.net/u/FENGberd/p/FNPC
 */

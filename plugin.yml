@@ -1,10 +1,10 @@
-#Copyright FENGberd © 2015
+#Copyright 2016 © FENGberd
 #Coding Project:
 #http://coding.net/u/FENGberd/p/FNPC
 
 name: FNPC
 main: FNPC\Main
-version: 1.1.5
+version: 1.1.6
 api: [1.0.0]
 load: POSTWORLD
 author: "FENGberd"
