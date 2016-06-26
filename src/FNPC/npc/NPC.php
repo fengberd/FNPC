@@ -486,14 +486,18 @@ class NPC extends \pocketmine\level\Location
 			Entity::DATA_NAMETAG=>[Entity::DATA_TYPE_STRING,$this->nametag],
 			Entity::DATA_SHOW_NAMETAG=>[Entity::DATA_TYPE_BYTE,1],
 			Entity::DATA_SILENT=>[Entity::DATA_TYPE_BYTE,0],
-			Entity::DATA_NO_AI=>[Entity::DATA_TYPE_BYTE,1],
-			Entity::DATA_LEAD_HOLDER=>[Entity::DATA_TYPE_LONG,-1],
-			Entity::DATA_LEAD=>[Entity::DATA_TYPE_BYTE,0]);
-		$player->dataPacket($pk);
-		$pk=new \pocketmine\network\protocol\SetEntityLinkPacket();
-		$pk->from=$this->getId();
-		$pk->to=0;
-		$pk->type=3;
+			Entity::DATA_NO_AI=>[Entity::DATA_TYPE_BYTE,1]);
+		if(\pocketmine\API_VERSION=='2.0.0')
+		{
+			$pk->metadata[Entity::DATA_LEAD_HOLDER]=[Entity::DATA_TYPE_LONG,-1];
+			$pk->metadata[Entity::DATA_LEAD]=[Entity::DATA_TYPE_BYTE,0];
+			$pk1=new \pocketmine\network\protocol\SetEntityLinkPacket();
+			$pk1->from=$this->getId();
+			$pk1->to=0;
+			$pk1->type=3;
+			$player->dataPacket($pk1);
+			unset($pk1);
+		}
 		$player->dataPacket($pk);
 		Server::getInstance()->updatePlayerListData($this->uuid,$this->getEID(),$this->nametag,$this->skinName,$this->skin,array($player));
 		unset($player,$pk,$level);
