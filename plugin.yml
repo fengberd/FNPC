@@ -1,10 +1,10 @@
-# Copyright 2016 © FENGberd.All rights reserved.
+# Copyright © 2016 FENGberd.All rights reserved.
 # GitHub Project:
 # https://github.com/fengberd/FNPC
 
 name: FNPC
 main: FNPC\Main
-version: 1.1.6
+version: 1.1.7
 api: [1.0.0]
 load: POSTWORLD
 author: "FENGberd"

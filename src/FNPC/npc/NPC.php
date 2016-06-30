@@ -2,7 +2,7 @@
 namespace FNPC\npc;
 
 /*
-Copyright 2016 © FENGberd All right reserved.
+Copyright © 2016 FENGberd All right reserved.
 GitHub Project:
 https://github.com/fengberd/FNPC
 */
@@ -429,9 +429,13 @@ class NPC extends \pocketmine\level\Location
 	
 	public function despawnFrom($player)
 	{
-		$pk=new \pocketmine\network\protocol\RemovePlayerPacket();
+		$class='\\pocketmine\\network\\protocol\\Remove'.(\pocketmine\API_VERSION=='2.0.0'?'Entity':'Player').'Packet';
+		$pk=new $class();
 		$pk->eid=$this->getEID();
-		$pk->clientId=$this->uuid;
+		if(\pocketmine\API_VERSION!='2.0.0')
+		{
+			$pk->clientId=$this->uuid;
+		}
 		$player->dataPacket($pk);
 		Server::getInstance()->removePlayerListData($this->uuid,array($player));
 		unset($player,$pk);
