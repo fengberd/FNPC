@@ -25,6 +25,7 @@ class NPC extends \pocketmine\level\Location
 	public static $pool=array();
 	public static $config=null;
 	public static $packet_hash='';
+	public static $metadata=array();
 	private static $unknownTypeData=array();
 	
 	public static function reloadUnknownNPC()
@@ -484,14 +485,16 @@ class NPC extends \pocketmine\level\Location
 		$pk->yaw=$this->yaw;
 		$pk->pitch=$this->pitch;
 		$pk->item=$this->handItem;
-		$pk->metadata=array(
-			Entity::DATA_FLAGS=>[Entity::DATA_TYPE_BYTE,0],
-			Entity::DATA_AIR=>[Entity::DATA_TYPE_SHORT,300],
-			Entity::DATA_NAMETAG=>[Entity::DATA_TYPE_STRING,$this->nametag],
-			Entity::DATA_SHOW_NAMETAG=>[Entity::DATA_TYPE_BYTE,1],
-			Entity::DATA_SILENT=>[Entity::DATA_TYPE_BYTE,0],
-			Entity::DATA_NO_AI=>[Entity::DATA_TYPE_BYTE,1]);
-		if(\pocketmine\API_VERSION=='2.0.0')
+		$pk->metadata=self::$metadata;
+		$base='\\pocketmine\\entity\\Entity::';
+		if(defined($base.'DATA_NAMETAG') && defined($base.'DATA_FLAGS') && defined($base.'DATA_FLAG_CAN_SHOW_NAMETAG') && defined($base.'DATA_FLAG_ALWAYS_SHOW_NAMETAG'))
+		{
+			$pk->metadata[Entity::DATA_NAMETAG]=[Entity::DATA_TYPE_STRING,$this->nametag];
+			$flags=0x00^1<<Entity::DATA_FLAG_CAN_SHOW_NAMETAG;
+			$flags^=1<<Entity::DATA_FLAG_ALWAYS_SHOW_NAMETAG;
+			$pk->metadata[Entity::DATA_FLAGS]=[Entity::DATA_TYPE_LONG,$flags];
+		}
+		if(defined($base.'DATA_LEAD_HOLDER') && class_exists('\\pocketmine\\network\\protocol\\SetEntityLinkPacket'))
 		{
 			$pk->metadata[Entity::DATA_LEAD_HOLDER]=[Entity::DATA_TYPE_LONG,-1];
 			$pk->metadata[Entity::DATA_LEAD]=[Entity::DATA_TYPE_BYTE,0];
@@ -504,6 +507,7 @@ class NPC extends \pocketmine\level\Location
 		}
 		$player->dataPacket($pk);
 		Server::getInstance()->updatePlayerListData($this->uuid,$this->getEID(),$this->nametag,$this->skinName,$this->skin,array($player));
+		Server::getInstance()->removePlayerListData($this->uuid,array($player));
 		unset($player,$pk,$level);
 		return true;
 	}

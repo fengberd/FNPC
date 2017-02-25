@@ -66,6 +66,22 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 			self::registerNpc('command','指令型NPC(使用/fnpc command)',CommandNPC::class,true);
 			self::registerNpc('teleport','传送型NPC(使用/fnpc teleport或/fnpc transfer)',TeleportNPC::class,true);
 		}
+		$base='\\pocketmine\\entity\\Entity::';
+		if(!defined($base.'DATA_NAMETAG') || !defined($base.'DATA_FLAGS') || !defined($base.'DATA_FLAG_CAN_SHOW_NAMETAG') || !defined($base.'DATA_FLAG_ALWAYS_SHOW_NAMETAG'))
+		{
+			$this->getLogger()->warning('当前核心存在奇葩问题,将导致无法正常显示NPC名称');
+		}
+		if(defined($base.'DATA_LEAD_HOLDER') && !class_exists('\\pocketmine\\network\\protocol\\SetEntityLinkPacket'))
+		{
+			$this->getLogger()->warning('你这奇葩核心删掉了SetEntityLink包,我不敢保证在玩家和NPC之间不会出现奇怪的绳子');
+		}
+		$reflect=new \ReflectionClass('\\pocketmine\\entity\\Entity');
+		$reflect=$reflect->getDefaultProperties();
+		if(!isset($reflect['dataProperties']))
+		{
+			throw new \Exception('抱歉,你正在使用一个FNPC无法兼容的智障核心');
+		}
+		NPC::$metadata=$reflect['dataProperties'];
 		SystemProvider::init($this);
 		NPC::init();
 		
