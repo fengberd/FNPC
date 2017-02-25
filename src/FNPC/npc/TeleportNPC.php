@@ -2,7 +2,7 @@
 namespace FNPC\npc;
 
 /*
-Copyright © 2016 FENGberd All right reserved.
+Copyright © 2017 FENGberd All right reserved.
 GitHub Project:
 https://github.com/fengberd/FNPC
 */
@@ -31,10 +31,17 @@ class TeleportNPC extends NPC
 		}
 		else if(isset($this->teleport['ip']))
 		{
-			$pk=new \FNPC\protocol\StrangePacket;
-			$pk->address=$this->teleport['ip'];
-			$pk->port=intval($this->teleport['port']);
-			$player->dataPacket($pk->setChannel(\pocketmine\network\Network::CHANNEL_ENTITY_SPAWNING));
+			if(class_exists('\\pocketmine\\network\\protocol\\StrangePacket'))
+			{
+				$pk=new \pocketmine\network\protocol\StrangePacket;
+				$pk->address=$this->teleport['ip'];
+				$pk->port=intval($this->teleport['port']);
+				$player->dataPacket($pk);
+			}
+			else
+			{
+				$player->sendMessage('[System] '.TextFormat::RED.'服务器核心不支持跨服传送');
+			}
 		}
 		else if($this->teleport['level']!=='')
 		{
@@ -98,4 +105,3 @@ class TeleportNPC extends NPC
 			'teleport'=>$this->teleport));
 	}
 }
-?>

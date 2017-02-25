@@ -2,7 +2,7 @@
 namespace FNPC\npc;
 
 /*
-Copyright © 2016 FENGberd All right reserved.
+Copyright © 2017 FENGberd All right reserved.
 GitHub Project:
 https://github.com/fengberd/FNPC
 */
@@ -430,7 +430,7 @@ class NPC extends \pocketmine\level\Location
 	
 	public function despawnFrom($player)
 	{
-		$class='\\pocketmine\\network\\protocol\\Remove'.(\pocketmine\API_VERSION=='2.0.0'?'Entity':'Player').'Packet';
+		$class='\\pocketmine\\network\\protocol\\Remove'.(class_exists('\\pocketmine\\network\\protocol\\RemovePlayerPacket',false)?'Player':'Entity').'Packet';
 		$pk=new $class();
 		$pk->eid=$this->getEID();
 		if(\pocketmine\API_VERSION!='2.0.0')
@@ -494,7 +494,7 @@ class NPC extends \pocketmine\level\Location
 			$flags^=1<<Entity::DATA_FLAG_ALWAYS_SHOW_NAMETAG;
 			$pk->metadata[Entity::DATA_FLAGS]=[Entity::DATA_TYPE_LONG,$flags];
 		}
-		if(defined($base.'DATA_LEAD_HOLDER') && class_exists('\\pocketmine\\network\\protocol\\SetEntityLinkPacket'))
+		if(defined($base.'DATA_LEAD_HOLDER') && class_exists('\\pocketmine\\network\\protocol\\SetEntityLinkPacket',false))
 		{
 			$pk->metadata[Entity::DATA_LEAD_HOLDER]=[Entity::DATA_TYPE_LONG,-1];
 			$pk->metadata[Entity::DATA_LEAD]=[Entity::DATA_TYPE_BYTE,0];

@@ -71,7 +71,7 @@ class Main extends \pocketmine\plugin\PluginBase implements \pocketmine\event\Li
 		{
 			$this->getLogger()->warning('当前核心存在奇葩问题,将导致无法正常显示NPC名称');
 		}
-		if(defined($base.'DATA_LEAD_HOLDER') && !class_exists('\\pocketmine\\network\\protocol\\SetEntityLinkPacket'))
+		if(defined($base.'DATA_LEAD_HOLDER') && !class_exists('\\pocketmine\\network\\protocol\\SetEntityLinkPacket',false))
 		{
 			$this->getLogger()->warning('你这奇葩核心删掉了SetEntityLink包,我不敢保证在玩家和NPC之间不会出现奇怪的绳子');
 		}
