@@ -178,6 +178,10 @@ class NPC extends \pocketmine\level\Location
 		$x=$this->x-$player->x;
 		$y=$this->y-$player->y;
 		$z=$this->z-$player->z;
+		if(sqrt($x*$x+$z*$z)==0 || sqrt($x*$x+$z*$z+$y*$y)==0)
+		{
+			return true;
+		}
 		$yaw=asin($x/sqrt($x*$x+$z*$z))/3.14*180;
 		$pitch=round(asin($y/sqrt($x*$x+$z*$z+$y*$y))/3.14*180);
 		if($z>0)
@@ -531,4 +535,3 @@ class NPC extends \pocketmine\level\Location
 		unset($pk);
 	}
 }
-?>
