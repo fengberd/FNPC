@@ -31,9 +31,9 @@ class TeleportNPC extends NPC
 		}
 		else if(isset($this->teleport['ip']))
 		{
-			if(class_exists('\\pocketmine\\network\\protocol\\StrangePacket'))
+			if(class_exists('\\pocketmine\\network\\protocol\\TransferPacket'))
 			{
-				$pk=new \pocketmine\network\protocol\StrangePacket;
+				$pk=new \pocketmine\network\protocol\TransferPacket;
 				$pk->address=$this->teleport['ip'];
 				$pk->port=intval($this->teleport['port']);
 				$player->dataPacket($pk);
