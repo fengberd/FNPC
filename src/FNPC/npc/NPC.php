@@ -54,8 +54,7 @@ class NPC extends \pocketmine\level\Location
 		foreach(NPC::$config->getAll() as $key=>$val)
 		{
 			if(($class=\FNPC\Main::getRegisteredNpcClass($val['type']))!==false)
-			{
-				$npc=new $class($key);
+			{				$npc=new $class($key);
 				$npc->reload();
 				$npc->save();
 			}
@@ -65,7 +64,7 @@ class NPC extends \pocketmine\level\Location
 			}
 			unset($key,$val,$npc,$class);
 		}
-	}
+ 	}
 	
 	public static function spawnAllTo($player,$level=false)
 	{
@@ -81,7 +80,7 @@ class NPC extends \pocketmine\level\Location
 	{
 		if($packet->pid()==\pocketmine\network\protocol\Info::INTERACT_PACKET)
 		{
-			if(NPC::$packet_hash!=spl_object_hash($packet))
+			if(NPC::$packet_hash!=spl_object_hash($packet) && $packet->action == \pocketmine\network\protocol\InteractPacket::ACTION_LEFT_CLICK)
 			{
 				NPC::$packet_hash=spl_object_hash($packet);
 				foreach(NPC::$pool as $npc)
