@@ -79,7 +79,7 @@ class NPC extends \pocketmine\level\Location
 	
 	public static function packetReceive($player,$packet)
 	{
-		if($packet->pid()==\pocketmine\network\protocol\Info::INTERACT_PACKET)
+		if($packet->pid()==\pocketmine\network\mcpe\protocol\ProtocolInfo::INTERACT_PACKET)
 		{
 			if(NPC::$packet_hash!=spl_object_hash($packet))
 			{
@@ -188,7 +188,7 @@ class NPC extends \pocketmine\level\Location
 		{
 			$yaw=-$yaw+180;
 		}
-		$pk=new \pocketmine\network\protocol\MovePlayerPacket();
+		$pk=new \pocketmine\network\mcpe\protocol\MovePlayerPacket();
 		$pk->eid=$this->getEID();
 		$pk->x=$this->x;
 		$pk->y=$this->y+1.62;
@@ -475,7 +475,7 @@ class NPC extends \pocketmine\level\Location
 			$this->despawnFrom($player);
 			return false;
 		}
-		$pk=new \pocketmine\network\protocol\AddPlayerPacket();
+		$pk=new \pocketmine\network\mcpe\protocol\AddPlayerPacket();
 		$pk->clientID=$this->clientID;
 		$pk->username=$this->nametag;
 		$pk->eid=$this->getEID();
@@ -502,7 +502,7 @@ class NPC extends \pocketmine\level\Location
 		{
 			$pk->metadata[Entity::DATA_LEAD_HOLDER]=[Entity::DATA_TYPE_LONG,-1];
 			$pk->metadata[Entity::DATA_LEAD]=[Entity::DATA_TYPE_BYTE,0];
-			$pk1=new \pocketmine\network\protocol\SetEntityLinkPacket();
+			$pk1=new \pocketmine\network\mcpe\protocol\SetEntityLinkPacket();
 			$pk1->from=$this->getId();
 			$pk1->to=0;
 			$pk1->type=3;
@@ -518,7 +518,7 @@ class NPC extends \pocketmine\level\Location
 	
 	public function sendPosition()
 	{
-		$pk=new \pocketmine\network\protocol\MovePlayerPacket();
+		$pk=new \pocketmine\network\mcpe\protocol\MovePlayerPacket();
 		$pk->eid=$this->getEID();
 		$pk->x=$this->x;
 		$pk->y=$this->y+1.62;
